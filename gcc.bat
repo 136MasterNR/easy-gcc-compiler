@@ -1,6 +1,6 @@
 @CHCP 65001 >NUL
 @VERIFY OFF
-@TITLE C Language : GCC-COMPILER v0.1
+@TITLE C Language : GCC-COMPILER v0.1.1
 @ECHO OFF
 
 
@@ -90,9 +90,9 @@ IF EXIST "%VBS%" DEL /F /Q "%VBS%"
 CSCRIPT //NOLOGO "%VBS%"
 
 IF %LANGUAGE%==EN ECHO.Cleaning up ...
-IF %LANGUAGE%==GR ECHO.Καθαρισμός...
+IF %LANGUAGE%==GR ECHO.Καθαρισμός ...
 IF EXIST "%VBS%" DEL /F /Q "%VBS%"
-IF EXIST "%CD%\gcc.zip" DEL /F /Q "%UPDZIP.LOC%"
+IF EXIST "%CD%\gcc.zip" DEL /F /Q "%CD%\gcc.zip"
 
 EXIT
 
@@ -104,7 +104,7 @@ IF NOT EXIST "%TARGET%" (
 	EXIT 1
 )
 
-DEL /Q "%OUT%"
+DEL /Q "%OUT%" 2>NUL
 
 IF %LANGUAGE%==EN TITLE Compiling ...
 IF %LANGUAGE%==GR TITLE Συναρμολόγηση ...
