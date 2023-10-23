@@ -12,4 +12,4 @@ GCC intaller, C language compiler and compiled exe launcher, all with one click,
 
 ## Educational Purposes
 - This project was made for educational purposes, providing a more compact way for executing C scripts.
-- The GCC download is hosted by @ComradeTurtle.
+- The GCC download is hosted by @ComradeTurtle, and has been explicitly compressed to compile only C files. Get the full package [here](https://sourceforge.net/projects/gcc-win64/), this is required to run C++ files.
