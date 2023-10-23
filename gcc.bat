@@ -58,11 +58,11 @@ EXIT
 
 :INSTALLER
 IF %LANGUAGE%==EN (
-	ECHO.The compiler (GCC) is not installed on your computer.
+	ECHO.The compiler ^(GCC^) is not installed on your computer.
 	CHOICE /C YN /N /M "Do you want to install GCC essentials (Y/N)?"
 )
 IF %LANGUAGE%==GR (
-	ECHO.Ο μεταγλωττιστής (GCC) δεν είναι εγκατεστημένος στον υπολογιστή σας.
+	ECHO.Ο μεταγλωττιστής ^(GCC^) δεν είναι εγκατεστημένος στον υπολογιστή σας.
 	CHOICE /C YN /N /M "Θέλετε να εγκαταστήσετε τα απαραίτητα πακέτα του GCC στον υπολογιστή σας; (Y/N)"
 )
 
@@ -70,6 +70,8 @@ IF ERRORLEVEL 2 (
 	:: If N is pressed, exit.
 	EXIT 1
 )
+
+ECHO.
 
 IF %LANGUAGE%==EN (
 	TITLE Downloading ...
@@ -79,7 +81,8 @@ IF %LANGUAGE%==GR (
 	TITLE Γίνεται λήψη ...
 	ECHO.Γίνεται λήψη ...
 )
-IF EXIST ".\gcc.zip" DEL /F /Q ".\gcc.zip"
+
+IF EXIST "%CD%\gcc.zip" DEL /F /Q "%CD%\gcc.zip"
 CURL -S "https://img.comradeturtle.dev/assets/gcc.zip" --SSL-NO-REVOKE >".\gcc.zip"
 
 ECHO.
@@ -91,8 +94,9 @@ IF %LANGUAGE%==GR (
 	TITLE Εγκατάσταση ...
 	ECHO.Εγκατάσταση ...
 )
-SET VBS=".\gccInstaller.VBS"
+SET VBS=".\gccInstaller.vbs"
 IF EXIST "%VBS%" DEL /F /Q "%VBS%"
+
 >%VBS% ECHO Set fso = CreateObject("Scripting.FileSystemObject")
 >>%VBS% ECHO If NOT fso.FolderExists("%COMPILER_PATH%") Then
 >>%VBS% ECHO fso.CreateFolder("%COMPILER_PATH%")
