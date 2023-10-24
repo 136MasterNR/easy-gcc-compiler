@@ -23,6 +23,9 @@ SET "COMPILER_PATH=C:\gcc"
 :: Temp rememberme file.
 SET "TMP_RMB=%TMP%\gcc_rememberme.cmd"
 
+:: Output warnings to a file.
+SET "WOUT=.\a.txt"
+
 
 :: Overwrite target there is a file has opened before.
 IF EXIST "%TMP_RMB%" (
@@ -136,16 +139,11 @@ DEL /Q "%OUT%" 2>NUL
 IF %LANGUAGE%==EN TITLE Compiling ...
 IF %LANGUAGE%==GR TITLE Συναρμολόγηση ...
 
-SET OUTPUT=FALSE
-
 :: The compiler can be configured from here. To run C++, change the -std switch to "c++17".
-FOR /F %%I IN ('START /B /W "" "%COMPILER_PATH%\bin\gcc.exe" -Wall -Wextra -g3 -O0 -std^=c11 "%TARGET%" -o "%OUT%"') DO (
-    SET "OUTPUT=TRUE"
-)
+CMD /C CALL "%COMPILER_PATH%\bin\gcc.exe" -Wall -Wextra -g3 -O0 -std^=c11 "%TARGET%" -o "%OUT%" 2^>^&1
 
 IF EXIST "%OUT%" (
-	START CMD /C TITLE  ^& "%OUT%" ^& PAUSE^>NUL
-	IF %OUTPUT%==TRUE PAUSE>NUL
+	START CMD /C @CHCP 65001 ^>NUL^&@TITLE  ^& "%OUT%" ^& PAUSE^>NUL
 ) ELSE (
 	ECHO.
 	IF %LANGUAGE%==EN ECHO.[1;31mFATAL[0m: [1mCompilation process failed, see above for hints.[0m
